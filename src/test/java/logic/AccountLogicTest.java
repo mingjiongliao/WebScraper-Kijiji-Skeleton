@@ -49,7 +49,7 @@ class AccountLogicTest {
     @AfterEach
     final void tearDown() throws Exception {
     }
-
+    // test for github
     @Test
     final void testGetAll() {
         //get all the accounts from the DB
