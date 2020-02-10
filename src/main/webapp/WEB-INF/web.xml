@@ -11,6 +11,10 @@
         <servlet-name>ItemTable</servlet-name>
         <servlet-class>view.ItemTable</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateCategory</servlet-name>
+        <servlet-class>view.CreateCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ImageTable</servlet-name>
         <url-pattern>/ImageTable</url-pattern>
@@ -18,6 +22,10 @@
     <servlet-mapping>
         <servlet-name>ItemTable</servlet-name>
         <url-pattern>/ItemTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCategory</servlet-name>
+        <url-pattern>/CreateCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
