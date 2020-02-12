@@ -100,7 +100,6 @@ public class ItemLogic extends GenericLogic<Item,ItemDAL>{
     @Override
     public Item createEntity(Map<String, String[]> parameterMap) {
         Item item = new Item();
-        try {
             /**
              *from mysql
              * 'id', 'int(10) unsigned', 'NO', 'PRI', NULL, ''
@@ -117,21 +116,20 @@ public class ItemLogic extends GenericLogic<Item,ItemDAL>{
             if(parameterMap.containsKey(ID)){
                 item.setId(Integer.parseInt(parameterMap.get(ID)[0]));
             }
-            item.setImage(image = new Image(Integer.valueOf(parameterMap.get(IMAGE_ID)[0])));
-            item.setCategory(category = new Category(Integer.valueOf(parameterMap.get(CATEGORY_ID)[0])));
+            try{
             DateFormat formatter;
             Date date;
             formatter = new SimpleDateFormat("dd-MMM-yy");
             date = formatter.parse(parameterMap.get(DATE)[0]);
             item.setDate(date);
+        } catch (ParseException ex) {
+            item.setDate(new Date());
+        }
             item.setDescription(parameterMap.get(DESCRIPTION)[0]);
             item.setLocation(parameterMap.get(LOCATION)[0]);
             item.setPrice(new BigDecimal(parameterMap.get(PRICE)[0]));
             item.setTitle(TITLE);
             item.setUrl(URL);
-        } catch (ParseException ex) {
-            Logger.getLogger(ItemLogic.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return item;
     }
 
