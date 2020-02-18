@@ -47,7 +47,6 @@ public class Item implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "title")
     private String title;
