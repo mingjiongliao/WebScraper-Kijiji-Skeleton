@@ -79,7 +79,7 @@ public class ItemDAL extends GenericDAL<Item>{
         return findResult( "Item.findByUrl", map);
     }
     
-    public List<Item> findByCategory( String categoryId){
+    public List<Item> findByCategory( int categoryId){
         Map<String, Object> map = new HashMap<>();
         map.put("categoryid", categoryId);
         return findResults( "Item.findByCategory", map);
