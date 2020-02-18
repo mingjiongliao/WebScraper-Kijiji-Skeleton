@@ -7,6 +7,7 @@ package dal;
 
 import entity.Account;
 import entity.Item;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class ItemDAL extends GenericDAL<Item>{
         return findResult( "Item.findById", map);
     }
     
-     public List<Item> findByPrice( String price){
+     public List<Item> findByPrice( BigDecimal price){
         Map<String, Object> map = new HashMap<>();
         map.put("price", price);
         return findResults( "Item.findByPrice", map);
