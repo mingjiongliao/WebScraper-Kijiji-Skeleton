@@ -143,7 +143,7 @@ public class ItemLogic extends GenericLogic<Item,ItemDAL>{
         return get(()->dao().findById(id));
     }
     
-    public List<Item> getWithPrice(String price) {
+    public List<Item> getWithPrice(BigDecimal price) {
         return get(()->dao().findByPrice(price));
     }
     
