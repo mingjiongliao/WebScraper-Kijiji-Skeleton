@@ -167,7 +167,7 @@ public class ItemLogic extends GenericLogic<Item,ItemDAL>{
         return get(()->dao().findByUrl(url));
     }
     
-    public List<Item> getWithCategory(String categoryId) {
+    public List<Item> getWithCategory(int categoryId) {
         return get(()->dao().findByCategory(categoryId));
     }
     
