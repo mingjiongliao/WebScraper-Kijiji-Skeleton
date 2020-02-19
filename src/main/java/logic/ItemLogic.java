@@ -122,12 +122,14 @@ public class ItemLogic extends GenericLogic<Item,ItemDAL>{
             formatter = new SimpleDateFormat("dd-MMM-yy");
             date = formatter.parse(parameterMap.get(DATE)[0]);
             item.setDate(date);
+            item.setPrice(new BigDecimal(parameterMap.get(PRICE)[0]));
         } catch (ParseException ex) {
             item.setDate(new Date());
+            item.setPrice(null);
         }
             item.setDescription(parameterMap.get(DESCRIPTION)[0]);
             item.setLocation(parameterMap.get(LOCATION)[0]);
-            item.setPrice(new BigDecimal(parameterMap.get(PRICE)[0]));
+            
             item.setTitle(TITLE);
             item.setUrl(URL);
         return item;
