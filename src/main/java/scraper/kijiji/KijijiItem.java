@@ -13,10 +13,48 @@ import java.util.Objects;
  */
 public class KijijiItem {
 
+    public String getId() {
+        return id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
-        return "KijijiItem{" + "id=" + id + '}';
+        return "KijijiItem{" + "id=" + id + ", url=" + url + ", imageUrl=" + imageUrl + ", imageName=" + imageName + ", price=" + price + ", title=" + title + ", date=" + date + ", location=" + location + ", description=" + description + '}';
     }
+
+   
 
     public KijijiItem() {
     }
