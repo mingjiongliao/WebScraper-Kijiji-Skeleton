@@ -26,7 +26,8 @@ public class Kijiji {
         doc = Jsoup.connect(kijijiUrl).get();
         return this;
     }
-
+    
+    
     @Deprecated
     public Kijiji downloadDefaultPage() throws IOException {
         return downloadPage(URL_NEWEST_COMPUTER_ACCESSORIES);
@@ -36,7 +37,16 @@ public class Kijiji {
         itemElements = doc.getElementsByAttribute(ATTRIBUTE_ID);
         return this;
     }
-
+    
+    public Kijiji proccessItems(Consumer<KijijiItem> callback){
+        itemElements.forEach((Element e)->
+                {
+                    callback.accept(new ItemBuilder().setElement(e).build());
+                }
+        );
+        return this;
+    }
+    
     /**
      * 
      * @param callback
@@ -45,15 +55,15 @@ public class Kijiji {
      */
     @Deprecated
     public Kijiji proccessItemsNoneBuilder(Consumer<BadKijijiItem> callback) {
-//        itemElements.forEach((Element element) -> {
-//            callback.accept( new ItemBuilder().setElement(element).build());
-//        });
-        for (Element element : itemElements) {
-            callback.accept( new BadKijijiItem(element));
-        }
+
+  //      itemElements.forEach((Element element) -> {
+  //          callback.accept( new ItemBuilder().setElement(element).build());
+  //      });
+       for (Element element : itemElements) {
+           callback.accept( new BadKijijiItem(element));       }
         return this;
     }
-
+    
     public static void main(String[] args) throws IOException {
         
         Consumer<BadKijijiItem> saveItemsNoneBuilder = (BadKijijiItem item) -> {
