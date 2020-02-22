@@ -117,21 +117,29 @@ public class ItemLogic extends GenericLogic<Item,ItemDAL>{
                 item.setId(Integer.parseInt(parameterMap.get(ID)[0]));
             }
             try{
-            DateFormat formatter;
             Date date;
-            formatter = new SimpleDateFormat("dd-MMM-yy");
-            date = formatter.parse(parameterMap.get(DATE)[0]);
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            date = format.parse(parameterMap.get(DATE)[0]);
             item.setDate(date);
-            item.setPrice(new BigDecimal(parameterMap.get(PRICE)[0]));
+            
         } catch (ParseException ex) {
             item.setDate(new Date());
-            item.setPrice(null);
         }
+            try{
+            String iprice = parameterMap.get(PRICE)[0];
+            iprice = iprice.replace("$", "");
+            iprice = iprice.replace(",","");
+            BigDecimal in = new BigDecimal(iprice); 
+            item.setPrice(in);
+            } catch (Exception e) {
+              item.setPrice(null); 
+            }
             item.setDescription(parameterMap.get(DESCRIPTION)[0]);
             item.setLocation(parameterMap.get(LOCATION)[0]);
             
-            item.setTitle(TITLE);
-            item.setUrl(URL);
+            item.setTitle(parameterMap.get(TITLE)[0]);
+            item.setUrl(parameterMap.get(URL)[0]);
+            
         return item;
     }
 
