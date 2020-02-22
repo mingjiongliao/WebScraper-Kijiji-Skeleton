@@ -11,8 +11,18 @@ import java.util.Objects;
  *
  * @author mingjiongliao
  */
-public class KijijiItem {
 
+public class KijijiItem {
+    private String id;
+    private String url;
+    private String imageUrl;
+    private String imageName;
+    private String price;
+    private String title;
+    private String date;
+    private String location;
+    private String description;
+    
     public String getId() {
         return id;
     }
@@ -119,15 +129,7 @@ public class KijijiItem {
     public void setDescription(String description) {
         this.description = description;
     }
-    private String id;
-    private String url;
-    private String imageUrl;
-    private String imageName;
-    private String price;
-    private String title;
-    private String date;
-    private String location;
-    private String description;
+
     
     
     
