@@ -76,7 +76,7 @@ public class KijijiView extends HttpServlet {
                 out.println("</div>");
                 out.println("<div class=\"details\">");
                 out.println("<div class=\"title\">");
-                out.printf("<a href=\"%s\" target=\"iframe_a\">%s</a>", e.getUrl(), e.getTitle());
+                out.printf("<a href=\"%s\" target=\"_blank\">%s</a>", e.getUrl(), e.getTitle());
                 out.println("</div>");
                 out.println("<div class=\"price\">");
                 out.println(e.getPrice());
@@ -121,7 +121,7 @@ public class KijijiView extends HttpServlet {
             //Creating the directory
             file.mkdirs();
         }
-
+        ItemLogic ilogic = new ItemLogic();
         Category cat = new CategoryLogic().getWithId(1);
         String kijijiUrl = cat.getUrl();
         Kijiji kij = new Kijiji().downloadPage(kijijiUrl).findAllItems();;
@@ -131,34 +131,40 @@ public class KijijiView extends HttpServlet {
             Map<String, String[]> imagemMap = new HashMap<>();
             Image img = new Image();
             Item item = null;
+            
             //add image first
             //Use FileUtility.downloadAndSaveFile(String url, String dest, String name) 
             //to download to System.getProperty("user.home")+"/KijijiImages/". Name is Item id plus “.jpg”.
-            if (new ItemLogic().getWithId(Integer.parseInt(i.getId())) == null) {
-                if (!i.getImageUrl().equals("") && i.getImageName().equals("")) {
-                    if (new ImageLogic().getWithPath(System.getProperty("user.home") + "/KijijiImages/" + i.getId() + ".jpg") == null) {
+            if (new ItemLogic().getWithId(Integer.parseInt(i.getId())) == null && !i.getId().isEmpty() && !i.getUrl().isEmpty()) {
+                if (new ItemLogic().getWithUrl(i.getUrl()) == null ) {
+                    if ( (!i.getImageUrl().isEmpty()) && (!i.getImageName().isEmpty()) && (new ImageLogic().getWithPath(System.getProperty("user.home") + "/KijijiImages/" + i.getId() + ".jpg") == null)) {
                         FileUtility.downloadAndSaveFile(i.getImageUrl(), System.getProperty("user.home") + "/KijijiImages/", i.getId() + ".jpg");
                         imagemMap.put(ImageLogic.URL, new String[]{i.getImageUrl()});
                         imagemMap.put(ImageLogic.NAME, new String[]{i.getImageName()});
                         imagemMap.put(ImageLogic.PATH, new String[]{System.getProperty("user.home") + "/KijijiImages/" + i.getId() + ".jpg"});
                         img = new ImageLogic().createEntity(imagemMap);
+                        try{
                         new ImageLogic().add(img);
+                        }catch(Exception e){
+                        
+                        }
+               
                         //then add item
                         itemMap.put(ItemLogic.ID, new String[]{i.getId()});
-                        itemMap.put(ItemLogic.URL, new String[]{i.getUrl()});
+                        itemMap.put(ItemLogic.URL, new String[]{i.getUrl()});  
                         itemMap.put(ItemLogic.DATE, new String[]{i.getDate()});
                         itemMap.put(ItemLogic.TITLE, new String[]{i.getTitle()});
                         itemMap.put(ItemLogic.PRICE, new String[]{i.getPrice()});
                         itemMap.put(ItemLogic.LOCATION, new String[]{i.getLocation()});
                         itemMap.put(ItemLogic.DESCRIPTION, new String[]{i.getDescription()});
 
-                        item = new ItemLogic().createEntity(itemMap);
+                        item = ilogic.createEntity(itemMap);
                         item.setCategory(cat);
                         item.setImage(img);
-                        new ItemLogic().add(item);
-                    }
-                }
-            }
+                        ilogic.add(item);
+              }
+         }
+                 }
         };
         kij.proccessItems(downLoads);
         processRequest(request, response);
