@@ -21,11 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mingjiongliao
  * 
- * Hello Shawn, For this Image deliver system, it doesn't work on my system. I have asked help from you.
- * But it seems like to be the problem from the Mac/Window system problem.
- * You have double checked/ debugged my code, it looks all good 
- * and you asked me to mark it here for not deducting my mark on this point.
- * thanks.
  */
 @WebServlet(name = "ImageDelivery", urlPatterns = {"/image/*"})
 public class ImageDelivery extends HttpServlet {
