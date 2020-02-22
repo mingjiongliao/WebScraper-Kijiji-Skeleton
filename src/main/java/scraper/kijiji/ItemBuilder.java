@@ -38,15 +38,35 @@ public class ItemBuilder {
     }
 
     public KijijiItem build() {
+       
         item.setId(element.attr(ATTRIBUTE_ID).trim());
-        item.setUrl(URL_BASE + element.getElementsByClass(ATTRIBUTE_TITLE).get(0).child(0).attr("href").trim());
+        item.setUrl(URL_BASE+element.getElementsByClass(ATTRIBUTE_TITLE).get(0).child(0).attr("href").trim());
         elements = element.getElementsByClass(ATTRIBUTE_IMAGE);
         if (elements.isEmpty()) {
             item.setImageUrl("");
             item.setImageName("");
         } else {
-            item.setImageUrl(elements.get(0).child(0).attr(ATTRIBUTE_IMAGE_SRC).trim());
-            item.setImageName(elements.get(0).child(0).attr(ATTRIBUTE_IMAGE_NAME).trim());
+            String image_url = elements.get(0).child(0).attr(ATTRIBUTE_IMAGE_SRC).trim();
+        if (image_url.isEmpty()) {
+            image_url = elements.get(0).child(0).attr("src").trim();
+            if (image_url.isEmpty()) {
+                image_url = elements.get(0).child(0).child(1).attr(ATTRIBUTE_IMAGE_SRC).trim();
+                item.setImageUrl(image_url);
+            }else{
+            item.setImageUrl(image_url);
+            }
+        }else{
+            item.setImageUrl(image_url);
+        }
+            String image_name = elements.get(0).child(0).attr(ATTRIBUTE_IMAGE_NAME).trim();
+        if (image_name.isEmpty()) {
+            
+            image_name = elements.get(0).child(0).child(1).attr(ATTRIBUTE_IMAGE_NAME).trim();
+            item.setImageName(image_name);
+        }else{
+            item.setImageName(image_name);
+        }
+
         }
 
         elements = element.getElementsByClass(ATTRIBUTE_PRICE);
@@ -65,14 +85,21 @@ public class ItemBuilder {
         if (elements.isEmpty()) {
             item.setDate("");
         } else {
-            item.setDate(elements.get(0).childNode(0).outerHtml().trim());
+            item.setDate(elements.get(0).text().trim());
         }
+        
+        Elements elements = element.getElementsByClass(ATTRIBUTE_LOCATION);
+        if(elements.isEmpty())
+            item.setLocation(""); 
+        item.setLocation(elements.get(0).childNode(0).outerHtml().trim());
+        
         elements = element.getElementsByClass(ATTRIBUTE_DESCRIPTION);
         if (elements.isEmpty()) {
             item.setDescription("");
         } else {
             item.setDescription(elements.get(0).text().trim());
         }
+      
         return item;
     }
 
