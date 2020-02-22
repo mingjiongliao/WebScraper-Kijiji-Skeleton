@@ -42,13 +42,14 @@ public class Item implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
+   
     private Integer id;
-    @NotNull
     @Column(name = "price")
     private BigDecimal price;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
     @Column(name = "title")
+    @NotNull
     private String title;
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
