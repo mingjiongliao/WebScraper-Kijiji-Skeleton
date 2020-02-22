@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package view;
-
 import common.FileUtility;
 import dal.ImageDAL;
 import java.util.function.Consumer;
@@ -39,6 +38,7 @@ import scraper.kijiji.KijijiItem;
 /**
  *
  * @author mingjiongliao
+ * github link: https://github.com/mingjiongliao/WebScraper-Kijiji-Skeleton
  */
 @WebServlet(name = "KijijiView", urlPatterns = {"/Kijiji"})
 public class KijijiView extends HttpServlet {
