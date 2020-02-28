@@ -69,7 +69,7 @@ public class ItemLogic extends GenericLogic<Item, ItemDAL> {
      * 'varchar(255)', 'NO', '', NULL, '' 'date', 'date', 'YES', '', NULL, ''
      * 'location', 'varchar(45)', 'YES', '', NULL, '' 'description', 'text',
      * 'NO', '', NULL, '' 'url', 'varchar(255)', 'NO', 'UNI', NULL, ''
-             *
+     *
      */
     @Override
     public List<String> getColumnNames() {
@@ -97,7 +97,7 @@ public class ItemLogic extends GenericLogic<Item, ItemDAL> {
          * 'YES', '', NULL, '' 'location', 'varchar(45)', 'YES', '', NULL, ''
          * 'description', 'text', 'NO', '', NULL, '' 'url', 'varchar(255)',
          * 'NO', 'UNI', NULL, ''
-             *
+         *
          */
 
         if (parameterMap.containsKey(ID)) {
