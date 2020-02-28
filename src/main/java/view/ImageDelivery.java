@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author mingjiongliao
- * 
+ *
  */
 @WebServlet(name = "ImageDelivery", urlPatterns = {"/image/*"})
 public class ImageDelivery extends HttpServlet {
@@ -42,7 +42,7 @@ public class ImageDelivery extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ImageDelivery</title>");            
+            out.println("<title>Servlet ImageDelivery</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ImageDelivery at " + request.getContextPath() + "</h1>");
@@ -62,33 +62,33 @@ public class ImageDelivery extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-      ServletContext cntx= req.getServletContext();
-      // Get the absolute path of the image
-      String filename = System.getProperty("user.home")+"/KijijiImages/" + req.getPathInfo().substring(1);
-      // retrieve mimeType dynamically
-      String mime = cntx.getMimeType(filename);
-      if (mime == null) {
-        resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        return;
-      }
+        ServletContext cntx = req.getServletContext();
+        // Get the absolute path of the image
+        String filename = System.getProperty("user.home") + "/KijijiImages/" + req.getPathInfo().substring(1);
+        // retrieve mimeType dynamically
+        String mime = cntx.getMimeType(filename);
+        if (mime == null) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
+        }
 
-      resp.setContentType(mime);
-      File file = new File(filename);
-      resp.setContentLength((int)file.length());
+        resp.setContentType(mime);
+        File file = new File(filename);
+        resp.setContentLength((int) file.length());
 
-      FileInputStream in = new FileInputStream(file);
-      OutputStream out = resp.getOutputStream();
+        FileInputStream in = new FileInputStream(file);
+        OutputStream out = resp.getOutputStream();
 
-      // Copy the contents of the file to the output stream
-       byte[] buf = new byte[1024];
-       int count = 0;
-       while ((count = in.read(buf)) >= 0) {
-         out.write(buf, 0, count);
-      }
-    out.close();
-    in.close();
+        // Copy the contents of the file to the output stream
+        byte[] buf = new byte[1024];
+        int count = 0;
+        while ((count = in.read(buf)) >= 0) {
+            out.write(buf, 0, count);
+        }
+        out.close();
+        in.close();
 
-}
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
