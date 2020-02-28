@@ -23,8 +23,8 @@ import logic.CategoryLogic;
  * @author mingjiongliao
  */
 @WebServlet(name = "CategoryTable", urlPatterns = {"/CategoryTable"})
-public class CategoryTableView extends HttpServlet{
-   
+public class CategoryTableView extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -100,6 +100,7 @@ public class CategoryTableView extends HttpServlet{
         log("GET");
         processRequest(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
