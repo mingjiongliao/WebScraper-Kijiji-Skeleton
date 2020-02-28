@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
  * @author Shariar (Shawn) Emami
  */
 public final class BadKijijiItem {
-    
+
     private static final String URL_BASE = "https://www.kijiji.ca";
 
     private static final String ATTRIBUTE_ID = "data-listing-id";
@@ -24,12 +24,12 @@ public final class BadKijijiItem {
 
     private final Element element;
 
-    BadKijijiItem( final Element element) {
+    BadKijijiItem(final Element element) {
         this.element = element;
     }
 
     public String getUrl() {
-        return URL_BASE+element.getElementsByClass(ATTRIBUTE_TITLE).get(0).child(0).attr("href").trim();
+        return URL_BASE + element.getElementsByClass(ATTRIBUTE_TITLE).get(0).child(0).attr("href").trim();
     }
 
     public String getId() {
@@ -51,7 +51,7 @@ public final class BadKijijiItem {
         return image;
     }
 
-      private String getImageName() {
+    private String getImageName() {
         Elements elements = element.getElementsByClass(ATTRIBUTE_IMAGE);
         if (elements.isEmpty()) {
             return "";
@@ -66,36 +66,41 @@ public final class BadKijijiItem {
 
     public String getPrice() {
         Elements elements = element.getElementsByClass(ATTRIBUTE_PRICE);
-        if(elements.isEmpty())
+        if (elements.isEmpty()) {
             return "";
+        }
         return elements.get(0).text().trim();
     }
 
     public String getTitle() {
         Elements elements = element.getElementsByClass(ATTRIBUTE_TITLE);
-        if(elements.isEmpty())
+        if (elements.isEmpty()) {
             return "";
+        }
         return elements.get(0).child(0).text().trim();
     }
 
     public String getDate() {
         Elements elements = element.getElementsByClass(ATTRIBUTE_DATE);
-        if(elements.isEmpty())
+        if (elements.isEmpty()) {
             return "";
+        }
         return elements.get(0).text().trim();
     }
 
     public String getLocation() {
         Elements elements = element.getElementsByClass(ATTRIBUTE_LOCATION);
-        if(elements.isEmpty())
+        if (elements.isEmpty()) {
             return "";
+        }
         return elements.get(0).childNode(0).outerHtml().trim();
     }
 
     public String getDescription() {
         Elements elements = element.getElementsByClass(ATTRIBUTE_DESCRIPTION);
-        if(elements.isEmpty())
+        if (elements.isEmpty()) {
             return "";
+        }
         return elements.get(0).text().trim();
     }
 
