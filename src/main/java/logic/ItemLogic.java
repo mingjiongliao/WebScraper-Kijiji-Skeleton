@@ -89,16 +89,6 @@ public class ItemLogic extends GenericLogic<Item, ItemDAL> {
     @Override
     public Item createEntity(Map<String, String[]> parameterMap) {
         Item item = new Item();
-        /**
-         * from mysql 'id', 'int(10) unsigned', 'NO', 'PRI', NULL, ''
-         * 'image_id', 'int(10) unsigned', 'NO', 'MUL', NULL, '' 'category_id',
-         * 'int(11)', 'NO', 'MUL', NULL, '' 'price', 'decimal(15,2)', 'YES', '',
-         * NULL, '' 'title', 'varchar(255)', 'NO', '', NULL, '' 'date', 'date',
-         * 'YES', '', NULL, '' 'location', 'varchar(45)', 'YES', '', NULL, ''
-         * 'description', 'text', 'NO', '', NULL, '' 'url', 'varchar(255)',
-         * 'NO', 'UNI', NULL, ''
-         *
-         */
 
         if (parameterMap.containsKey(ID)) {
             item.setId(Integer.parseInt(parameterMap.get(ID)[0]));
@@ -123,7 +113,6 @@ public class ItemLogic extends GenericLogic<Item, ItemDAL> {
         }
         item.setDescription(parameterMap.get(DESCRIPTION)[0]);
         item.setLocation(parameterMap.get(LOCATION)[0]);
-
         item.setTitle(parameterMap.get(TITLE)[0]);
         item.setUrl(parameterMap.get(URL)[0]);
 
