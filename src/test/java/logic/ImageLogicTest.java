@@ -128,6 +128,16 @@ public class ImageLogicTest {
         assertEquals(expected.getPath(), actual.getPath());
         assertEquals(expected.getUrl(), actual.getUrl());
     }
+  private int evaluateIFinList(List<Image> list){
+      int inList = 0;
+      for (Image image : list) {
+             if (image.getId().equals(expectedImage.getId())) {
+                assertImageEquals(expectedImage, image);
+                inList++;
+            };
+        }
+      return inList;
+  } 
     /**
      * Test of getWithId method, of class ImageLogic.
      */
@@ -142,11 +152,9 @@ public class ImageLogicTest {
      */
     @Test
     final void testGetWithUrl() {
-       List<Image> actualImage = logic.getWithUrl(expectedImage.getUrl());
-        for (Image oneOfImage : actualImage) {
-            assertImageEquals(expectedImage, oneOfImage);
-        }
-       
+       List<Image> list = logic.getWithUrl(expectedImage.getUrl());
+       int findFull = evaluateIFinList(list);
+       assertEquals(1, findFull, "if zero means not found, if more than one means duplicate");
     }
 
     /**
@@ -154,10 +162,9 @@ public class ImageLogicTest {
      */
     @Test
     final void testGetWithName() {
-       List<Image> actualImage = logic.getWithName(expectedImage.getName());
-        for (Image oneOfImage : actualImage) {
-            assertImageEquals(expectedImage, oneOfImage);
-        }
+       List<Image> list = logic.getWithName(expectedImage.getName());
+         int findFull = evaluateIFinList(list);
+       assertEquals(1, findFull, "if zero means not found, if more than one means duplicate");
     }
     
     @Test
