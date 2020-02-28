@@ -42,7 +42,7 @@ public class Item implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
-   
+
     private Integer id;
     @Column(name = "price")
     private BigDecimal price;
@@ -184,5 +184,5 @@ public class Item implements Serializable {
     public String toString() {
         return "entity.Item[ id=" + id + " ]";
     }
-    
+
 }
