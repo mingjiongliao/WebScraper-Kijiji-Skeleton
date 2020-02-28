@@ -17,50 +17,48 @@ import java.util.Map;
  * @author mingjiongliao
  */
 /**
-+ImageDAL()
-+findAll() : List<Image>
-+findById(id : int) : Image
-+findByUrl(url : String) : List<Image>
-+findByPath(path : String) : Image
-+findByName(name : String) : List<Image>
- **/
-public class ImageDAL extends GenericDAL<Image>{
-    
+ * +ImageDAL() +findAll() : List<Image>
+ * +findById(id : int) : Image +findByUrl(url : String) : List<Image>
+ * +findByPath(path : String) : Image +findByName(name : String) : List<Image>
+ *
+ */
+public class ImageDAL extends GenericDAL<Image> {
+
     public ImageDAL() {
         super(Image.class);
     }
-    
-    public List<Image> findAll(){
-        return findResults( "Image.findAll", null);
+
+    public List<Image> findAll() {
+        return findResults("Image.findAll", null);
     }
-    
-    public Image findById( int id){
+
+    public Image findById(int id) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
-        return findResult( "Image.findById", map);
+        return findResult("Image.findById", map);
     }
-    
-    public List<Image> findByUrl( String url){
+
+    public List<Image> findByUrl(String url) {
         Map<String, Object> map = new HashMap<>();
         map.put("url", url);
-        return findResults( "Image.findByUrl", map);
+        return findResults("Image.findByUrl", map);
     }
-    
-    public Image findByPath(String path){
+
+    public Image findByPath(String path) {
         Map<String, Object> map = new HashMap<>();
         map.put("path", path);
         return findResult("Image.findByPath", map);
     }
-    
-    public List<Image> findByName( String name){
+
+    public List<Image> findByName(String name) {
         Map<String, Object> map = new HashMap<>();
         map.put("name", name);
-        return findResults( "Image.findByName", map);
+        return findResults("Image.findByName", map);
     }
-    
-    public List<Image> findContaining(String search){
+
+    public List<Image> findContaining(String search) {
         Map<String, Object> map = new HashMap<>();
         map.put("search", search);
-        return findResults( "Image.findContaining", map);
+        return findResults("Image.findContaining", map);
     }
 }
