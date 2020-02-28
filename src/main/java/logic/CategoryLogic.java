@@ -73,6 +73,7 @@ public class CategoryLogic extends GenericLogic<Category,CategoryDAL>{
         return get(()->dao().findByTitle(title));
     }
     
+    @Override
     public List<Category> search(String search){
         return get(()->dao().findContaining(search));
     }
