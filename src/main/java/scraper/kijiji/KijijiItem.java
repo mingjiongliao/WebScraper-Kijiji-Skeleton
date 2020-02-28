@@ -11,8 +11,8 @@ import java.util.Objects;
  *
  * @author mingjiongliao
  */
-
 public class KijijiItem {
+
     private String id;
     private String url;
     private String imageUrl;
@@ -22,7 +22,7 @@ public class KijijiItem {
     private String date;
     private String location;
     private String description;
-    
+
     public String getId() {
         return id;
     }
@@ -63,8 +63,6 @@ public class KijijiItem {
     public String toString() {
         return "KijijiItem{" + "id=" + id + ", url=" + url + ", imageUrl=" + imageUrl + ", imageName=" + imageName + ", price=" + price + ", title=" + title + ", date=" + date + ", location=" + location + ", description=" + description + '}';
     }
-
-   
 
     public KijijiItem() {
     }
@@ -130,7 +128,4 @@ public class KijijiItem {
         this.description = description;
     }
 
-    
-    
-    
 }
