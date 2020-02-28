@@ -42,10 +42,10 @@ public class ImageTableView extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Image Table View</title>");            
+            out.println("<title>Servlet Image Table View</title>");
             out.println("</head>");
             out.println("<body>");
-             out.println("<table style=\"margin-left: auto; margin-right: auto;\" border=\"1\">");
+            out.println("<table style=\"margin-left: auto; margin-right: auto;\" border=\"1\">");
             out.println("<caption>Image</caption>");
             out.println("<tr>");
             out.println("<th>ID</th>");
@@ -77,16 +77,18 @@ public class ImageTableView extends HttpServlet {
             out.println("</html>");
         }
     }
+
     private String toStringMap(Map<String, String[]> m) {
-            StringBuilder builder = new StringBuilder();
-            for (String k : m.keySet()) {
-                builder.append("Key=").append(k)
-                        .append(", ")
-                        .append("Value/s=").append(Arrays.toString(m.get(k)))
-                        .append(System.lineSeparator());
-            }
-            return builder.toString();
-        }   
+        StringBuilder builder = new StringBuilder();
+        for (String k : m.keySet()) {
+            builder.append("Key=").append(k)
+                    .append(", ")
+                    .append("Value/s=").append(Arrays.toString(m.get(k)))
+                    .append(System.lineSeparator());
+        }
+        return builder.toString();
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
