@@ -26,36 +26,26 @@ import java.util.logging.Logger;
  *
  * @author mingjiongliao
  */
-
 /**
-* from UML
-+DESCRIPTION : String = "description"
-+CATEGORY_ID : String = "categoryId"
-+IMAGE_ID : String = "imageId"
-+LOCATION : String = "location"
-+PRICE : String = "price"
-+TITLE : String = "title"
-+DATE : String = "date"
-+URL : String = "url"
-+ID : String = "id"
-+ItemLogic()
-+getAll() : List<Item>
-+getWithId(id : int) : Item
-+getWithPrice(price : String) : List<Item>
-+getWithTitle(title : String) : List<Item>
-+getWithDate(date : String) : List<Item>
-+getWithLocation(location : String) : List<Item>
-+getWithDescription(description : String) : List<Item>
-+getWithUrl(url : String) : Item
-+getWithCategory(categoryId : String) : List<Item>
-+search(search : String) : List<Item>
-+createEntity(parameterMap : Map<String, String[]>) : Item
-+getColumnNames() : List<String>
-+getColumnCodes() : List<String>
-+extractDataAsList(e : Item) : List<?>
+ * from UML +DESCRIPTION : String = "description" +CATEGORY_ID : String =
+ * "categoryId" +IMAGE_ID : String = "imageId" +LOCATION : String = "location"
+ * +PRICE : String = "price" +TITLE : String = "title" +DATE : String = "date"
+ * +URL : String = "url" +ID : String = "id" +ItemLogic() +getAll() : List<Item>
+ * +getWithId(id : int) : Item +getWithPrice(price : String) : List<Item>
+ * +getWithTitle(title : String) : List<Item>
+ * +getWithDate(date : String) : List<Item>
+ * +getWithLocation(location : String) : List<Item>
+ * +getWithDescription(description : String) : List<Item>
+ * +getWithUrl(url : String) : Item +getWithCategory(categoryId : String) :
+ * List<Item>
+ * +search(search : String) : List<Item>
+ * +createEntity(parameterMap : Map<String, String[]>) : Item +getColumnNames()
+ * : List<String>
+ * +getColumnCodes() : List<String>
+ * +extractDataAsList(e : Item) : List<?>
  */
-public class ItemLogic extends GenericLogic<Item,ItemDAL>{
-    
+public class ItemLogic extends GenericLogic<Item, ItemDAL> {
+
     public static final String URL = "url";
     public static final String ID = "id";
     public static final String DESCRIPTION = "description";
@@ -67,121 +57,118 @@ public class ItemLogic extends GenericLogic<Item,ItemDAL>{
     public static final String DATE = "date";
     private Category category;
     private Image image;
+
     public ItemLogic() {
         super(new ItemDAL());
     }
+
     /**
-             *from mysql
-             * 'id', 'int(10) unsigned', 'NO', 'PRI', NULL, ''
-             * 'image_id', 'int(10) unsigned', 'NO', 'MUL', NULL, ''
-             * 'category_id', 'int(11)', 'NO', 'MUL', NULL, ''
-             * 'price', 'decimal(15,2)', 'YES', '', NULL, ''
-             * 'title', 'varchar(255)', 'NO', '', NULL, ''
-             * 'date', 'date', 'YES', '', NULL, ''
-             * 'location', 'varchar(45)', 'YES', '', NULL, ''
-             * 'description', 'text', 'NO', '', NULL, ''
-             * 'url', 'varchar(255)', 'NO', 'UNI', NULL, ''
-             **/
+     * from mysql 'id', 'int(10) unsigned', 'NO', 'PRI', NULL, '' 'image_id',
+     * 'int(10) unsigned', 'NO', 'MUL', NULL, '' 'category_id', 'int(11)', 'NO',
+     * 'MUL', NULL, '' 'price', 'decimal(15,2)', 'YES', '', NULL, '' 'title',
+     * 'varchar(255)', 'NO', '', NULL, '' 'date', 'date', 'YES', '', NULL, ''
+     * 'location', 'varchar(45)', 'YES', '', NULL, '' 'description', 'text',
+     * 'NO', '', NULL, '' 'url', 'varchar(255)', 'NO', 'UNI', NULL, ''
+             *
+     */
     @Override
     public List<String> getColumnNames() {
-         return Arrays.asList("ID","IMAGE_ID","CATEGORY_ID","PRICE","TITLE","DATE","LOCATION","DESCRIPTION","URL");   
+        return Arrays.asList("ID", "IMAGE_ID", "CATEGORY_ID", "PRICE", "TITLE", "DATE", "LOCATION", "DESCRIPTION", "URL");
     }
 
     @Override
     public List<String> getColumnCodes() {
-         return Arrays.asList(ID,IMAGE_ID,CATEGORY_ID,PRICE,TITLE,DATE,LOCATION,DESCRIPTION,URL); 
+        return Arrays.asList(ID, IMAGE_ID, CATEGORY_ID, PRICE, TITLE, DATE, LOCATION, DESCRIPTION, URL);
     }
 
     @Override
     public List<?> extractDataAsList(Item e) {
-           return Arrays.asList(e.getId(),e.getImage().getId(),e.getCategory().getId(),e.getPrice(),e.getTitle(),e.getDate(),e.getLocation(),e.getDescription(),e.getUrl()); 
+        return Arrays.asList(e.getId(), e.getImage().getId(), e.getCategory().getId(), e.getPrice(), e.getTitle(), e.getDate(), e.getLocation(), e.getDescription(), e.getUrl());
     }
 
     @Override
     public Item createEntity(Map<String, String[]> parameterMap) {
         Item item = new Item();
-            /**
-             *from mysql
-             * 'id', 'int(10) unsigned', 'NO', 'PRI', NULL, ''
-             * 'image_id', 'int(10) unsigned', 'NO', 'MUL', NULL, ''
-             * 'category_id', 'int(11)', 'NO', 'MUL', NULL, ''
-             * 'price', 'decimal(15,2)', 'YES', '', NULL, ''
-             * 'title', 'varchar(255)', 'NO', '', NULL, ''
-             * 'date', 'date', 'YES', '', NULL, ''
-             * 'location', 'varchar(45)', 'YES', '', NULL, ''
-             * 'description', 'text', 'NO', '', NULL, ''
-             * 'url', 'varchar(255)', 'NO', 'UNI', NULL, ''
-             **/
-            
-            if(parameterMap.containsKey(ID)){
-                item.setId(Integer.parseInt(parameterMap.get(ID)[0]));
-            }
-            try{
+        /**
+         * from mysql 'id', 'int(10) unsigned', 'NO', 'PRI', NULL, ''
+         * 'image_id', 'int(10) unsigned', 'NO', 'MUL', NULL, '' 'category_id',
+         * 'int(11)', 'NO', 'MUL', NULL, '' 'price', 'decimal(15,2)', 'YES', '',
+         * NULL, '' 'title', 'varchar(255)', 'NO', '', NULL, '' 'date', 'date',
+         * 'YES', '', NULL, '' 'location', 'varchar(45)', 'YES', '', NULL, ''
+         * 'description', 'text', 'NO', '', NULL, '' 'url', 'varchar(255)',
+         * 'NO', 'UNI', NULL, ''
+             *
+         */
+
+        if (parameterMap.containsKey(ID)) {
+            item.setId(Integer.parseInt(parameterMap.get(ID)[0]));
+        }
+        try {
             Date date;
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             date = format.parse(parameterMap.get(DATE)[0]);
             item.setDate(date);
-            
+
         } catch (ParseException ex) {
             item.setDate(new Date());
         }
-            try{
+        try {
             String iprice = parameterMap.get(PRICE)[0];
             iprice = iprice.replace("$", "");
-            iprice = iprice.replace(",","");
-            BigDecimal in = new BigDecimal(iprice); 
+            iprice = iprice.replace(",", "");
+            BigDecimal in = new BigDecimal(iprice);
             item.setPrice(in);
-            } catch (Exception e) {
-              item.setPrice(null); 
-            }
-            item.setDescription(parameterMap.get(DESCRIPTION)[0]);
-            item.setLocation(parameterMap.get(LOCATION)[0]);
-            
-            item.setTitle(parameterMap.get(TITLE)[0]);
-            item.setUrl(parameterMap.get(URL)[0]);
-            
+        } catch (Exception e) {
+            item.setPrice(null);
+        }
+        item.setDescription(parameterMap.get(DESCRIPTION)[0]);
+        item.setLocation(parameterMap.get(LOCATION)[0]);
+
+        item.setTitle(parameterMap.get(TITLE)[0]);
+        item.setUrl(parameterMap.get(URL)[0]);
+
         return item;
     }
 
     @Override
     public List<Item> getAll() {
-        return get(()->dao().findAll());
+        return get(() -> dao().findAll());
     }
 
     @Override
     public Item getWithId(int id) {
-        return get(()->dao().findById(id));
+        return get(() -> dao().findById(id));
     }
-    
+
     public List<Item> getWithPrice(BigDecimal price) {
-        return get(()->dao().findByPrice(price));
+        return get(() -> dao().findByPrice(price));
     }
-    
+
     public List<Item> getWithTitle(String title) {
-        return get(()->dao().findByTitle(title));
+        return get(() -> dao().findByTitle(title));
     }
-    
+
     public List<Item> getWithDate(String date) {
-        return get(()->dao().findByDate(date));
+        return get(() -> dao().findByDate(date));
     }
-    
+
     public List<Item> getWithLocation(String location) {
-        return get(()->dao().findByLocation(location));
+        return get(() -> dao().findByLocation(location));
     }
-    
+
     public List<Item> getWithDescription(String description) {
-        return get(()->dao().findByDescription(description));
+        return get(() -> dao().findByDescription(description));
     }
-    
+
     public Item getWithUrl(String url) {
-        return get(()->dao().findByUrl(url));
+        return get(() -> dao().findByUrl(url));
     }
-    
+
     public List<Item> getWithCategory(int categoryId) {
-        return get(()->dao().findByCategory(categoryId));
+        return get(() -> dao().findByCategory(categoryId));
     }
-    
-     public List<Item> search(String search){
-        return get(()->dao().findContaining(search));
+
+    public List<Item> search(String search) {
+        return get(() -> dao().findContaining(search));
     }
 }
