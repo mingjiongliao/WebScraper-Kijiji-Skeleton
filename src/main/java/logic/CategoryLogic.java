@@ -5,11 +5,14 @@
  */
 package logic;
 
+import common.ValidationException;
 import dal.CategoryDAL;
 import entity.Category;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import static logic.AccountLogic.DISPLAY_NAME;
+import static logic.ImageLogic.URL;
 
 /**
  *
@@ -87,8 +90,26 @@ public class CategoryLogic extends GenericLogic<Category, CategoryDAL> {
         if (parameterMap.containsKey(ID)) {
             category.setId(Integer.parseInt(parameterMap.get(ID)[0]));
         }
-        category.setUrl(parameterMap.get(URL)[0]);
-        category.setTitle(parameterMap.get(TITLE)[0]);
+        // set url
+        if (parameterMap.containsKey(URL) && parameterMap.get(URL) != null) {
+            if (parameterMap.get(URL)[0].isEmpty() || (parameterMap.get(URL)[0].length() > 255)) {
+                throw new ValidationException("url must at least one character or maximum 255");
+            }
+            category.setUrl(parameterMap.get(URL)[0]);
+
+        } else {
+            throw new ValidationException("The url doesn't exist");
+        }
+        // set title
+        if (parameterMap.containsKey(TITLE) && parameterMap.get(TITLE) != null) {
+            if (parameterMap.get(TITLE)[0].isEmpty() || (parameterMap.get(TITLE)[0].length() > 255)) {
+                throw new ValidationException("title must at least one character or maximum 255");
+            }
+            category.setTitle(parameterMap.get(TITLE)[0]);
+
+        } else {
+            throw new ValidationException("The title doesn't exist");
+        }
         return category;
     }
 }
