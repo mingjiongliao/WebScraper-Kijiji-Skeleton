@@ -65,7 +65,7 @@ public class KijijiItem {
         return "KijijiItem{" + "id=" + id + ", url=" + url + ", imageUrl=" + imageUrl + ", imageName=" + imageName + ", price=" + price + ", title=" + title + ", date=" + date + ", location=" + location + ", description=" + description + '}';
     }
 
-    public KijijiItem() {
+    KijijiItem() {
     }
 
     @Override
@@ -93,39 +93,39 @@ public class KijijiItem {
         return true;
     }
 
-    public void setId(String id) {
+    void setId(String id) {
         this.id = id;
     }
 
-    public void setUrl(String url) {
+    void setUrl(String url) {
         this.url = url;
     }
 
-    public void setImageUrl(String imageUrl) {
+    void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
-    public void setImageName(String imageName) {
+    void setImageName(String imageName) {
         this.imageName = imageName;
     }
 
-    public void setPrice(String price) {
+    void setPrice(String price) {
         this.price = price;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
-    public void setDate(String date) {
+    void setDate(String date) {
         this.date = date;
     }
 
-    public void setLocation(String location) {
+    void setLocation(String location) {
         this.location = location;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
     }
 
