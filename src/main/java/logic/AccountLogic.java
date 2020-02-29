@@ -1,11 +1,13 @@
 package logic;
 
+import common.ValidationException;
 import dal.AccountDAL;
 import entity.Account;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+//import javax.validation.ValidationException;
 
 /**
  *
@@ -106,12 +108,40 @@ public class AccountLogic extends GenericLogic<Account, AccountDAL> {
     @Override
     public Account createEntity(Map<String, String[]> parameterMap) {
         Account account = new Account();
+        //set ID
         if (parameterMap.containsKey(ID)) {
             account.setId(Integer.parseInt(parameterMap.get(ID)[0]));
         }
-        account.setDisplayName(parameterMap.get(DISPLAY_NAME)[0]);
-        account.setUser(parameterMap.get(USER)[0]);
-        account.setPassword(parameterMap.get(PASSWORD)[0]);
+        // set Disaplayname
+        if (parameterMap.containsKey(DISPLAY_NAME) && parameterMap.get(DISPLAY_NAME) != null) {
+            if (parameterMap.get(DISPLAY_NAME)[0].isEmpty() || (parameterMap.get(DISPLAY_NAME)[0].length() > 45)) {
+                throw new ValidationException("display name must at least one character or maximum 45");
+            }
+            account.setDisplayName(parameterMap.get(DISPLAY_NAME)[0]);
+
+        } else {
+            throw new ValidationException("The display name doesn't exist");
+        }
+        //set user
+        if (parameterMap.containsKey(USER) && parameterMap.get(USER) != null) {
+            if (parameterMap.get(USER)[0].isEmpty() || (parameterMap.get(USER)[0].length() > 45)) {
+                throw new ValidationException("user name must at least one character or maximum 45");
+            }
+            account.setUser(parameterMap.get(USER)[0]);
+
+        } else {
+            throw new ValidationException("The user doesn't exist");
+        }
+        //set password
+        if (parameterMap.containsKey(PASSWORD) && parameterMap.get(PASSWORD) != null) {
+            if (parameterMap.get(PASSWORD)[0].isEmpty() || (parameterMap.get(PASSWORD)[0].length() > 45)) {
+                throw new ValidationException("pass word must at least one character or maximum 45");
+            }
+            account.setPassword(parameterMap.get(PASSWORD)[0]);
+
+        } else {
+            throw new ValidationException("The password doesn't exist");
+        }
         return account;
     }
 
