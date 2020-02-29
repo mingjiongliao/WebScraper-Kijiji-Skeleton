@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import entity.Account;
 import common.TomcatStartUp;
-import common.ValidationException;
+import java.lang.NullPointerException;
 import dal.EMFactory;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -189,80 +189,6 @@ class AccountLogicTest {
         Account returnedAccount = logic.createEntity(sampleMap);
 
         assertAccountEquals(expectedAccount, returnedAccount);
-    }
-
-    @Test
-    final void testCreateEntityNullAndEmptyValues() {
-        Map<String, String[]> sampleMap = new HashMap<>();
-        Consumer<Map<String, String[]>> fillMap = (Map<String, String[]> map) -> {
-            map.clear();
-            map.put(AccountLogic.ID, new String[]{Integer.toString(expectedAccount.getId())});
-            map.put(AccountLogic.DISPLAY_NAME, new String[]{expectedAccount.getDisplayName()});
-            map.put(AccountLogic.USER, new String[]{expectedAccount.getUser()});
-            map.put(AccountLogic.PASSWORD, new String[]{expectedAccount.getPassword()});
-        };
-
-        //idealy every test should be in its own method
-        fillMap.accept(sampleMap);
-        sampleMap.replace(AccountLogic.ID, null);
-        assertThrows(NullPointerException.class, () -> logic.createEntity(sampleMap));
-        sampleMap.replace(AccountLogic.ID, new String[]{});
-        assertThrows(IndexOutOfBoundsException.class, () -> logic.createEntity(sampleMap));
-
-        fillMap.accept(sampleMap);
-        sampleMap.replace(AccountLogic.DISPLAY_NAME, null);
-        assertThrows(NullPointerException.class, () -> logic.createEntity(sampleMap));
-        sampleMap.replace(AccountLogic.DISPLAY_NAME, new String[]{});
-        assertThrows(IndexOutOfBoundsException.class, () -> logic.createEntity(sampleMap));
-
-        fillMap.accept(sampleMap);
-        sampleMap.replace(AccountLogic.USER, null);
-        assertThrows(NullPointerException.class, () -> logic.createEntity(sampleMap));
-        sampleMap.replace(AccountLogic.USER, new String[]{});
-        assertThrows(IndexOutOfBoundsException.class, () -> logic.createEntity(sampleMap));
-
-        fillMap.accept(sampleMap);
-        sampleMap.replace(AccountLogic.PASSWORD, null);
-        assertThrows(NullPointerException.class, () -> logic.createEntity(sampleMap));
-        sampleMap.replace(AccountLogic.PASSWORD, new String[]{});
-        assertThrows(IndexOutOfBoundsException.class, () -> logic.createEntity(sampleMap));
-    }
-
-
-    @Test
-    final void testCreateEntityEdgeValues() {
-        IntFunction<String> generateString = (int length) -> {
-            //https://www.baeldung.com/java-random-string#java8-alphabetic
-            return new Random().ints('a', 'z' + 1).limit(length)
-                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                    .toString();
-        };
-        
-        Map<String, String[]> sampleMap = new HashMap<>();
-        sampleMap.put(AccountLogic.ID, new String[]{Integer.toString(1)});
-        sampleMap.put(AccountLogic.DISPLAY_NAME, new String[]{generateString.apply(1)});
-        sampleMap.put(AccountLogic.USER, new String[]{generateString.apply(1)});
-        sampleMap.put(AccountLogic.PASSWORD, new String[]{generateString.apply(1)});
-
-        //idealy every test should be in its own method
-        Account returnedAccount = logic.createEntity(sampleMap);
-        assertEquals(Integer.parseInt(sampleMap.get(AccountLogic.ID)[0]), returnedAccount.getId());
-        assertEquals(sampleMap.get(AccountLogic.DISPLAY_NAME)[0], returnedAccount.getDisplayName());
-        assertEquals(sampleMap.get(AccountLogic.USER)[0], returnedAccount.getUser());
-        assertEquals(sampleMap.get(AccountLogic.PASSWORD)[0], returnedAccount.getPassword());
-        
-        sampleMap = new HashMap<>();
-        sampleMap.put(AccountLogic.ID, new String[]{Integer.toString(1)});
-        sampleMap.put(AccountLogic.DISPLAY_NAME, new String[]{generateString.apply(45)});
-        sampleMap.put(AccountLogic.USER, new String[]{generateString.apply(45)});
-        sampleMap.put(AccountLogic.PASSWORD, new String[]{generateString.apply(45)});
-
-        //idealy every test should be in its own method
-        returnedAccount = logic.createEntity(sampleMap);
-        assertEquals(Integer.parseInt(sampleMap.get(AccountLogic.ID)[0]), returnedAccount.getId());
-        assertEquals(sampleMap.get(AccountLogic.DISPLAY_NAME)[0], returnedAccount.getDisplayName());
-        assertEquals(sampleMap.get(AccountLogic.USER)[0], returnedAccount.getUser());
-        assertEquals(sampleMap.get(AccountLogic.PASSWORD)[0], returnedAccount.getPassword());
     }
 
     @Test
