@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="logic.AccountLogicTest" time="14.657" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="logic.CategoryLogicTest" time="0.625" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,16 +61,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testCreateEntity" classname="logic.AccountLogicTest" time="0.39"/>
-  <testcase name="testGetAccountWithDisplayName" classname="logic.AccountLogicTest" time="0.078"/>
-  <testcase name="testGetAccountWith" classname="logic.AccountLogicTest" time="0.11"/>
-  <testcase name="testExtractDataAsList" classname="logic.AccountLogicTest" time="0.031"/>
-  <testcase name="testGetAccountWIthUser" classname="logic.AccountLogicTest" time="0.094"/>
-  <testcase name="testGetAccountsWithPassword" classname="logic.AccountLogicTest" time="0.094"/>
-  <testcase name="testCreateEntityAndAdd" classname="logic.AccountLogicTest" time="0.109"/>
-  <testcase name="testGetAll" classname="logic.AccountLogicTest" time="0.109"/>
-  <testcase name="testGetColumnCodes" classname="logic.AccountLogicTest" time="0.032"/>
-  <testcase name="testGetColumnNames" classname="logic.AccountLogicTest" time="0.015"/>
-  <testcase name="testGetWithId" classname="logic.AccountLogicTest" time="0.063"/>
-  <testcase name="testSearch" classname="logic.AccountLogicTest" time="0.078"/>
+  <testcase name="testCreateEntity" classname="logic.CategoryLogicTest" time="0"/>
+  <testcase name="testExtractDataAsList" classname="logic.CategoryLogicTest" time="0"/>
+  <testcase name="testGetAll" classname="logic.CategoryLogicTest" time="0.125"/>
+  <testcase name="testGetColumnCodes" classname="logic.CategoryLogicTest" time="0.391"/>
+  <testcase name="testGetColumnNames" classname="logic.CategoryLogicTest" time="0.016"/>
+  <testcase name="testGetWithId" classname="logic.CategoryLogicTest" time="0"/>
+  <testcase name="testGetWithUrl" classname="logic.CategoryLogicTest" time="0"/>
+  <testcase name="testSearch" classname="logic.CategoryLogicTest" time="0.031"/>
+  <testcase name="testGetWithTitle" classname="logic.CategoryLogicTest" time="0.062"/>
 </testsuite>

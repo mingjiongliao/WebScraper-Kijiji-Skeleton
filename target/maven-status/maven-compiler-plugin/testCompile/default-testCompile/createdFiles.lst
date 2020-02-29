@@ -1,2 +1,5 @@
 logic\AccountLogicTest.class
+logic\CategoryLogicTest.class
+logic\ImageLogicTest.class
+logic\ItemLogicTest.class
 common\TomcatStartUp.class
