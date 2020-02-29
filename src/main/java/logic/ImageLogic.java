@@ -5,12 +5,14 @@
  */
 package logic;
 
+import common.ValidationException;
 import dal.ImageDAL;
 import entity.Category;
 import entity.Image;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import static logic.AccountLogic.DISPLAY_NAME;
 
 /**
  *
@@ -60,9 +62,39 @@ public class ImageLogic extends GenericLogic<Image, ImageDAL> {
         if (parameterMap.containsKey(ID)) {
             image.setId(Integer.parseInt(parameterMap.get(ID)[0]));
         }
-        image.setUrl(parameterMap.get(URL)[0]);
-        image.setPath(parameterMap.get(PATH)[0]);
-        image.setName(parameterMap.get(NAME)[0]);
+
+        // set url
+        if (parameterMap.containsKey(URL) && parameterMap.get(URL) != null) {
+            if (parameterMap.get(URL)[0].isEmpty() || (parameterMap.get(URL)[0].length() > 255)) {
+                throw new ValidationException("url must at least one character or maximum 255");
+            }
+            image.setUrl(parameterMap.get(URL)[0]);
+
+        } else {
+            throw new ValidationException("The url doesn't exist");
+        }
+        // set NAME
+        if (parameterMap.containsKey(NAME) && parameterMap.get(NAME) != null) {
+            if (parameterMap.get(NAME)[0].isEmpty() || (parameterMap.get(NAME)[0].length() > 255)) {
+                throw new ValidationException("name must at least one character or maximum 255");
+            }
+            image.setName(parameterMap.get(NAME)[0]);
+
+        } else {
+            throw new ValidationException("The name doesn't exist");
+
+        }
+        // set path
+        if (parameterMap.containsKey(PATH) && parameterMap.get(PATH) != null) {
+            if (parameterMap.get(PATH)[0].isEmpty() || (parameterMap.get(PATH)[0].length() > 255)) {
+                throw new ValidationException("PATH must at least one character or maximum 255");
+            }
+            image.setPath(parameterMap.get(PATH)[0]);
+
+        } else {
+            throw new ValidationException("The PATH doesn't exist");
+
+        }
         return image;
     }
 
