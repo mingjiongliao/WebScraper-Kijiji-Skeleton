@@ -65,15 +65,7 @@ public class ItemLogic extends GenericLogic<Item, ItemDAL> {
         super(new ItemDAL());
     }
 
-    /**
-     * from mysql 'id', 'int(10) unsigned', 'NO', 'PRI', NULL, '' 'image_id',
-     * 'int(10) unsigned', 'NO', 'MUL', NULL, '' 'category_id', 'int(11)', 'NO',
-     * 'MUL', NULL, '' 'price', 'decimal(15,2)', 'YES', '', NULL, '' 'title',
-     * 'varchar(255)', 'NO', '', NULL, '' 'date', 'date', 'YES', '', NULL, ''
-     * 'location', 'varchar(45)', 'YES', '', NULL, '' 'description', 'text',
-     * 'NO', '', NULL, '' 'url', 'varchar(255)', 'NO', 'UNI', NULL, ''
-     *
-     */
+    
     @Override
     public List<String> getColumnNames() {
         return Arrays.asList("ID", "IMAGE_ID", "CATEGORY_ID", "PRICE", "TITLE", "DATE", "LOCATION", "DESCRIPTION", "URL");

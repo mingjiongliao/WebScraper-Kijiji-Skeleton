@@ -71,11 +71,11 @@ public class ImageDelivery extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
-
+        //create new file
         resp.setContentType(mime);
         File file = new File(filename);
         resp.setContentLength((int) file.length());
-
+        //create input stream
         FileInputStream in = new FileInputStream(file);
         OutputStream out = resp.getOutputStream();
 

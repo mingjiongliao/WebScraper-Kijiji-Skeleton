@@ -36,7 +36,7 @@ public class ItemBuilder {
         this.element = element;
         return this;
     }
-
+    //Build method: Convert BadKijijiItem to KijijiItem and ItemBuilder. This is the builder design pattern
     public KijijiItem build() {
 
         item.setId(element.attr(ATTRIBUTE_ID).trim());

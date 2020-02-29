@@ -36,7 +36,7 @@ public class Kijiji {
         itemElements = doc.getElementsByAttribute(ATTRIBUTE_ID);
         return this;
     }
-
+    //this method is just updated version of proccessItemsNoneBuilder which works with builder instead.
     public Kijiji proccessItems(Consumer<KijijiItem> callback) {
         itemElements.forEach((Element e)
                 -> {

@@ -56,7 +56,7 @@ public class KijijiView extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ItemLogic logic = new ItemLogic();
             List<Item> entities = logic.getAll();
-
+            // use all the entites to map in the web page
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -66,6 +66,7 @@ public class KijijiView extends HttpServlet {
 
             out.println("<h1>Servlet KijijiView at " + request.getContextPath() + "</h1>");
             out.println("<div class=\"center-column\">");
+            //map the items
             for (Item e : entities) {
                 out.println("<div class=\"item\">");
                 out.println("<div class=\"image\">");
@@ -118,10 +119,13 @@ public class KijijiView extends HttpServlet {
             //Creating the directory
             file.mkdirs();
         }
+        //get the URL for category you want from CategoryLogic.
         ItemLogic ilogic = new ItemLogic();
         Category cat = new CategoryLogic().getWithId(1);
         String kijijiUrl = cat.getUrl();
-        Kijiji kij = new Kijiji().downloadPage(kijijiUrl).findAllItems();;
+        //download the kijiji items
+        Kijiji kij = new Kijiji().downloadPage(kijijiUrl).findAllItems();
+        // This method takes a lambda which will be executed for each KijijiItem. Type of this lambda is Consumer.
         Consumer<KijijiItem> downLoads = (KijijiItem i)
                 -> {
             Map<String, String[]> itemMap = new HashMap<>();
@@ -146,7 +150,7 @@ public class KijijiView extends HttpServlet {
 
                         }
 
-                        //then add item
+                        //then add item to db
                         itemMap.put(ItemLogic.ID, new String[]{i.getId()});
                         itemMap.put(ItemLogic.URL, new String[]{i.getUrl()});
                         itemMap.put(ItemLogic.DATE, new String[]{i.getDate()});

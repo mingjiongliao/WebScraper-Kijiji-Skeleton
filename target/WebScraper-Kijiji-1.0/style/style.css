@@ -10,7 +10,7 @@ body , html{
 }
 
 body{
-    background: LightGray;
+    background: darkslategrey;
     margin: 0 auto;
     max-width: 1080px;
 }

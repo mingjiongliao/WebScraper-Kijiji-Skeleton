@@ -17,6 +17,7 @@ import java.util.Map;
  * @author mingjiongliao
  */
 /**
+ * ERR rules: *
  * +ImageDAL() +findAll() : List<Image>
  * +findById(id : int) : Image +findByUrl(url : String) : List<Image>
  * +findByPath(path : String) : Image +findByName(name : String) : List<Image>

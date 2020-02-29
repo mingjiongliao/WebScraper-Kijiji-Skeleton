@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author mingjiongliao
  */
-/**
+/**ERR rules:
  * +ItemDAL() +findAll() : List<Item>
  * +findById(id : int) : Item +findByPrice(price : String) : List<Item>
  * +findByTitle(title : String) : List<Item>

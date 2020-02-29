@@ -15,6 +15,7 @@ import java.util.Map;
  * @author mingjiongliao
  */
 /**
+ * ERR rules:
  * UML: +CategoryDAL() +findAll() : List<Category>
  * +findById(id : int) : Category +findByUrl(url : String) : Category
  * +findByTitle(title : String) : Category

@@ -7,10 +7,10 @@ import java.util.Map;
 
 /**
  *
- * @author Shariar (Shawn) Emami
+ * @author Mingjiong Liao
  */
 public class AccountDAL extends GenericDAL<Account> {
-
+    
     public AccountDAL() {
         super(Account.class);
     }

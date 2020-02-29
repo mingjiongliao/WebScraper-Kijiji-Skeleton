@@ -10,6 +10,7 @@ import java.util.Objects;
 /**
  *
  * @author mingjiongliao
+ * KijijiItem is a simple POJO item which follows the Class diagrams attached. all setters are default access.
  */
 public class KijijiItem {
 
