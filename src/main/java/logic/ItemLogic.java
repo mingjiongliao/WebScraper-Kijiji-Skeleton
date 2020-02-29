@@ -5,11 +5,13 @@
  */
 package logic;
 
+import common.ValidationException;
 import dal.ItemDAL;
 import entity.Category;
 import entity.Image;
 import entity.Item;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static logic.ImageLogic.URL;
 
 /**
  *
@@ -107,14 +110,50 @@ public class ItemLogic extends GenericLogic<Item, ItemDAL> {
             iprice = iprice.replace("$", "");
             iprice = iprice.replace(",", "");
             BigDecimal in = new BigDecimal(iprice);
-            item.setPrice(in);
+            if (in.toString().isEmpty() || in.toString().length()>15) {
+                throw new ValidationException("price must be like this [xxxx.xx]");
+            }
+            item.setPrice(in.setScale(2, BigDecimal.ROUND_HALF_UP));
         } catch (Exception e) {
             item.setPrice(null);
         }
-        item.setDescription(parameterMap.get(DESCRIPTION)[0]);
-        item.setLocation(parameterMap.get(LOCATION)[0]);
-        item.setTitle(parameterMap.get(TITLE)[0]);
-        item.setUrl(parameterMap.get(URL)[0]);
+        // set url
+        if (parameterMap.containsKey(URL) && parameterMap.get(URL) != null) {
+            if (parameterMap.get(URL)[0].isEmpty() || (parameterMap.get(URL)[0].length() > 255)) {
+                throw new ValidationException("url must at least one character or maximum 255");
+            }
+            item.setUrl(parameterMap.get(URL)[0]);
+
+        } else {
+            throw new ValidationException("The url doesn't exist");
+        }
+        // set title
+        if (parameterMap.containsKey(TITLE) && parameterMap.get(TITLE) != null) {
+            if (parameterMap.get(TITLE)[0].isEmpty() || (parameterMap.get(TITLE)[0].length() > 255)) {
+                throw new ValidationException("title must at least one character or maximum 255");
+            }
+            item.setTitle(parameterMap.get(TITLE)[0]);
+
+        } else {
+            throw new ValidationException("The title doesn't exist");
+        }
+        // set description
+        if (parameterMap.containsKey(DESCRIPTION) && parameterMap.get(DESCRIPTION) != null) {
+            item.setDescription(parameterMap.get(DESCRIPTION)[0]);
+
+        } else {
+            throw new ValidationException("The description doesn't exist");
+        }
+        // set location
+        if (parameterMap.containsKey(LOCATION) && parameterMap.get(LOCATION) != null) {
+            if (parameterMap.get(LOCATION)[0].isEmpty() || (parameterMap.get(LOCATION)[0].length() > 45)) {
+                throw new ValidationException("location must at least one character or maximum 45");
+            }
+            item.setLocation(parameterMap.get(LOCATION)[0]);
+
+        } else {
+            throw new ValidationException("The location doesn't exist");
+        }
 
         return item;
     }
